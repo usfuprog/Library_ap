@@ -2,17 +2,22 @@
 
 class Author {
     public $id, $name, $surname, $birthdate;
+    
+    public function __construct($id, $name, $surname, $birthdate) {
+        $this->Init($id, $name, $surname, $birthdate);
+    }
+    
     public function Init($id, $name, $surname, $birthdate) {
         $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
         $this->birthdate = $birthdate;
     }
-    public function Load($conn, $_id) {
-        $res = $conn->query("Select name, surname, birthdate From Authors Where id={$_id}");
+    public function Load($conn, $id) {
+        $res = $conn->query("Select name, surname, birthdate From Authors Where id={$id}");
         if ($res && ($r = $res->fetch_row()))
         {
-            Init($_id, $r[0], $r[1], $r[2]);
+            $this->Init($id, $r[0], $r[1], $r[2]);
             return TRUE;
         }
         return FALSE;
