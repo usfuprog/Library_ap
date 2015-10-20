@@ -1,43 +1,36 @@
-<!-- ?
-    if ($qs = filter_input(INPUT_SERVER, 'QUERY_STRING')) {
-        $req = explode('?', filter_input(INPUT_SERVER, 'REQUEST_URI'));
-        $prm = trim($req[0], '/') . '/';
-        foreach(explode('&', trim($qs, '/')) as $itm) {
-            $pp = explode('=', $itm);
-            $prm = $prm . $pp[0] . '-' . $pp[1] . '/';
+<?php
+    if (filter_input(INPUT_SERVER, 'QUERY_STRING')) {
+        $prm = explode('?', filter_input(INPUT_SERVER, 'REQUEST_URI'));
+        $prm = trim($prm[0], '/');
+        if (strlen($prm)) {
+            $prm = $prm . '/';
         }
-                
+        foreach(filter_input_array(INPUT_GET) as $k=>$v) {
+            $prm = $prm . $k . '/' . $v . '/';
+        }
         header("Location: /" . $prm, TRUE, 301);
     }
-? -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-<?
+
     //print_r($GLOBALS);
     //print_r($_REQUEST);
     //print_r($_SERVER);
     //print_r($qs);
     //echo $_SERVER['REQUEST_URI'];
+    define('__ROOT__', dirname(__FILE__) . '/');
+    require_once 'conf.php';
+    require_once 'router.php';
     
-    require_once 'conn.php';
-    require_once 'smarty.php';
-    require_once 'model_book.php';
-    require_once 'model_publisher.php';
+    $req_uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
+    //$post_get = (filter_input_array(INPUT_POST) ?: array()) + (filter_input_array(INPUT_GET) ?: array());
+    $post = filter_input_array(INPUT_POST);
+    $router = new Router($req_uri, $post);
+    $ctrl = $router->Controller() ?: DEFAULT_CTRL;
+    $ctrl_php = 'controller_' . strtolower($ctrl) . '.php';
+    $ctrl_class = 'Controller' . $ctrl;
+    $action = $router->Action() ?: DEFAULT_ACTION;
+    $params = $router->Params();
+
+    require_once DIR_CTRL . $ctrl_php;
+    $controller = new $ctrl_class();
     
-    $pubId = filter_input(INPUT_GET, 'publisher');
-    $books = FindBooks($conn, $pubId);
-    //require_once 'view_books.php';
-    $pubs = array(0 => '- Все -') + Publisher::FindAll($conn);
-    
-    $smarty->assign('books', $books);
-    $smarty->assign('pubs', $pubs);
-    $smarty->assign('pubId', $pubId);
-    $smarty->display('books.tpl');
-?>
-    </body>
-</html>
+    $controller->$action($params);
