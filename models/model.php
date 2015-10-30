@@ -6,8 +6,9 @@ class Model {
         for($i = 0; $i < count($fields); $i++) {
             $prm = $prm . (empty($prm) ? '' : ',') . '$r[' . $i . ']';
         }
+        
         $eval = '$obj=new ' . $class . "($prm);";
-
+        //echo $eval;
         $q = "Select " . implode(',', $fields) . " From $tbl";
         $res = $conn->query($q);
         $ret = array();

@@ -24,8 +24,9 @@ class Router {
         for($i = 2; $i < count($this->uri_parts); $i += 2) {
             $prm[ $this->uri_parts[$i] ] = $this->uri_parts[$i + 1];
         }
-        if ($this->post)
+        if ($this->post) {
             $prm = $prm + $this->post;
+        }
         return $prm;
     }
 }

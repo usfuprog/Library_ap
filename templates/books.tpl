@@ -8,6 +8,7 @@
         <form method="get" action="/Book/Index">
             {html_options name="catId" options=$cats selected=$catId}
             {html_options name="pubId" options=$pubs selected=$pubId}
+            {html_options name="authId" options=$auth selected=$authId}
             <input type="submit" value="Refresh">
         </form>
         
@@ -19,6 +20,7 @@
                     <th>Date</th>
                     <th>Category</th>
                     <th>Publisher</th>
+                    <th>Author</th>
                 </tr>
             </thead>
             {foreach from=$books item=$b}
@@ -28,6 +30,7 @@
                     <td>{$b->date->format('d.m.Y')}</td>
                     <td>{$b->category}</td>
                     <td>{$b->publisher}</td>
+                    <td>{$b->author}</td>
                 </tr>
             {/foreach}
         </table>
