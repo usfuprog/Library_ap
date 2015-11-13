@@ -5,11 +5,19 @@
         <group>
             <file>file:/C:/OpenServer/domains/Library/models/model_category.php</file>
             <file>file:/C:/OpenServer/domains/Library/index.php</file>
+            <file>file:/C:/OpenServer/domains/Library/models/model_publisher.php</file>
+            <file>file:/C:/OpenServer/domains/Library/templates/modify_db/add_book.tpl</file>
+            <file>file:/C:/OpenServer/domains/Library/SQL/library.sql</file>
+            <file>file:/C:/OpenServer/domains/Library/templates/books.tpl</file>
+            <file>file:/C:/OpenServer/domains/Library/router.php</file>
             <file>file:/C:/OpenServer/domains/Library/models/model_book.php</file>
+            <file>file:/C:/OpenServer/domains/Library/templates/login.tpl</file>
             <file>file:/C:/OpenServer/domains/Library/models/model_author.php</file>
             <file>file:/C:/OpenServer/domains/Library/controllers/controller_book.php</file>
-            <file>file:/C:/OpenServer/domains/Library/models/model_publisher.php</file>
-            <file>file:/C:/OpenServer/domains/Library/templates/books.tpl</file>
+            <file>file:/C:/OpenServer/domains/Library/conf.php</file>
+            <file>file:/C:/OpenServer/domains/Library/templates/layout.tpl</file>
+            <file>file:/C:/OpenServer/domains/Library/models/model.php</file>
+            <file>file:/C:/OpenServer/domains/Library/TEST.TXT</file>
         </group>
     </open-files>
 </project-private>

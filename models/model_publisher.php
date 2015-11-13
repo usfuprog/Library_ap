@@ -22,5 +22,20 @@ class Publisher extends Model {
 //        }
 //        return $pubs;
     }
+    
+    public static function GetId($conn, $name)
+    {
+        $q = "SELECT id FROM Publishers WHERE Publishers.name = '$name'";
+        $res = $conn->query($q);
+        $zzz = $res->fetch_row();
+        if (count($zzz))
+        {
+            return $zzz[0];
+        }
+        else 
+        {
+            return -1;
+        }
+    }
 }
 

@@ -16,4 +16,19 @@ class Category extends Model {
     public static function GetAll($conn) {
         return Model::Select($conn, 'Categories', array('id', 'name'), 'Category');
     }
+    
+    public static function GetId($conn, $name)
+    {
+        $q = "SELECT id FROM Categories WHERE Categories.name = '$name'";
+        $res = $conn->query($q);
+        $zzz = $res->fetch_row();
+        if (count($zzz))
+        {
+            return $zzz[0];
+        }
+        else 
+        {
+            return -1;
+        }
+    }
 }

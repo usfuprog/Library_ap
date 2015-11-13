@@ -67,3 +67,26 @@ Insert Into BooksAuthors (book_id, author_id) Values
         (Select id From Books Where name = 'Война и мир'),
         (Select id From Authors Where surname = 'Толстой')
     );
+
+
+Insert Into Books (name, pages, date, category_id, publisher_id) Values
+    ('Сборник стихов', 100, '1850-11-10',
+        (Select id From Categories Where name='Поэзия'),
+        (Select id From Publishers Where name='PUB XXX')
+    );
+
+Insert Into Books (name, pages, date, category_id, publisher_id) Values
+    ('Безымянная книга', 100, '1973-11-10',
+        (Select id From Categories Where name='Проза'),
+        (Select id From Publishers Where name='PUB ZZZ')
+    );
+
+Insert Into BooksAuthors (book_id, author_id) Values
+    (
+        (Select id From Books Where name = 'Сборник стихов'),
+        (Select id From Authors Where surname = 'Пушкин')
+    ),
+    (
+        (Select id From Books Where name = 'Сборник стихов'),
+        (Select id From Authors Where surname = 'Толстой')
+    );

@@ -3,12 +3,13 @@
 require_once __ROOT__  . 'conf.php';
 require_once DIR_BASE . 'conn.php';
 require_once DIR_BASE . 'smarty.php';
+require_once DIR_BASE . 'view.php';
 
 class Controller {
-    protected $conn, $smarty;
+    protected $conn, $view;
     
     public function __construct() {
-        $this->smarty = new Smarty();
+        $this->view = new View();
         $this->conn = getConn();
     }
 }
