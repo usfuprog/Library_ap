@@ -11,7 +11,7 @@ class tester
             $current .= $params;
         else
             $current = $params;
-        $params .= "       ";//kak napisat \n v file ???????????
+        $current .= "       \n";
         file_put_contents($file, $current);
     }
 

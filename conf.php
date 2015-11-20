@@ -16,6 +16,6 @@ define('DEFAULT_ACTION', 'Index');
 
 define('DEFAULT_LAYOUT', 'layout.tpl');
 define('CONTENT_TPL_VAR', 'content_tpl');
-define('DIR_MODIFY', DIR_VIEW.'modify_db/');
+define('DIR_MODIFY_DB', DEFAULT_CTRL.'modify_db/');
 
 ?>

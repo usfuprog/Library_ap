@@ -29,7 +29,7 @@ class Book {
                 $this->data[$name] = $value;
         }
 
-    public static function Find($conn, $pubId = NULL, $catId = NULL, $authId = NULL) {
+    public static function Find($conn, $book_id = NULL, $pubId = NULL, $catId = NULL, $authId = NULL) {
         $q = "Select b.id, b.name, b.date, b.publisher_id, p.name, b.category_id, c.name, ".
                 "a.id, a.name, a.surname, a.birthdate " .
                 "From Publishers as p, Categories as c, Books as b " .
@@ -37,15 +37,22 @@ class Book {
                 "Left Outer Join Authors as a On a.id = ba.author_id " .
                 "Where b.publisher_id = p.id And b.category_id = c.id";
         
-        if (isset($pubId) && $pubId >= 0) {
-            $q = $q . " And p.id = $pubId";
-        }
-        if (isset($catId) && $catId >= 0) {
-            $q = $q . " And c.id = $catId";
-        }
-        if (isset($authId) && $authId >= 0)
+        if (isset($book_id) && $book_id >= 0)
         {
-            $q = $q . " And ba.author_id = $authId";
+            $q = $q . " And b.id = $book_id";
+        }
+        else
+        {
+            if (isset($pubId) && $pubId >= 0) {
+                $q = $q . " And p.id = $pubId";
+            }
+            if (isset($catId) && $catId >= 0) {
+                $q = $q . " And c.id = $catId";
+            }
+            if (isset($authId) && $authId >= 0)
+            {
+                $q = $q . " And ba.author_id = $authId";
+            }
         }
 //echo $q;
         $res = $conn->query($q);
@@ -74,7 +81,7 @@ class Book {
     }
     
     public static function Add($conn, $params)
-    {
+    {//peredelat Add nehvatilo vremeni ...
         $q = "SELECT id FROM books WHERE books.name = '$params[book_name]'";
         $res = $conn->query($q);
         $zzz = $res->fetch_row();
@@ -127,4 +134,24 @@ class Book {
         //echo Author::GetId($conn, $params['author_name'], $params['author_surname'], $params['author_birthdate']);
         
     }
+    
+    public static function Delete($conn, $id)
+    {
+        //echo $id;
+        //kak ostavit focus na main page ???
+        $book_delete = self::Find($conn, $id);
+        echo $book_delete[0]->name;// <<< pocemu eto nerabotajet ???
+        
+        foreach ($book_delete as $book)
+        {
+            $q = "DELETE FROM BooksAuthors WHERE BooksAuthors.book_id = $book->id";
+            $conn->query($q);
+            $q = "DELETE FROM books WHERE books.id = $book->id";
+            $conn->query($q);
+            
+            return "Book \"" . $book->name . "\" was successfully delete from the database ";
+        }
+    }
+    
+    
     }

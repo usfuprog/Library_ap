@@ -1,25 +1,26 @@
-<?php /* Smarty version 3.1.28-dev/63, created on 2015-11-08 23:38:14
+<?php /* Smarty version 3.1.28-dev/63, created on 2015-11-17 21:12:54
          compiled from "C:\OpenServer\domains\Library\templates\books.tpl" */ ?>
 <?php
 $_valid = $_smarty_tpl->decodeProperties(array (
   'has_nocache_code' => false,
   'version' => '3.1.28-dev/63',
-  'unifunc' => 'content_563fb2b6c16d28_15278971',
+  'unifunc' => 'content_564b6e26db72a0_13234090',
   'file_dependency' => 
   array (
     '113d321916b7c620bcac53a3dccc7893c22a9da6' => 
     array (
       0 => 'C:\\OpenServer\\domains\\Library\\templates\\books.tpl',
-      1 => 1447015000,
+      1 => 1447783821,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:modify_db/add_book.tpl' => 1,
   ),
 ),false);
-if ($_valid && !is_callable('content_563fb2b6c16d28_15278971')) {
-function content_563fb2b6c16d28_15278971 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_564b6e26db72a0_13234090')) {
+function content_564b6e26db72a0_13234090 ($_smarty_tpl) {
 if (!is_callable('smarty_function_html_options')) require_once 'C:/OpenServer/domains/Library/smarty/libs/plugins\\function.html_options.php';
 ?>
 <div>
@@ -32,7 +33,7 @@ if (!is_callable('smarty_function_html_options')) require_once 'C:/OpenServer/do
 
         <input type="submit" value="Refresh">
     </form>
-
+    
     <table>
         <thead>
             <tr>
@@ -42,6 +43,9 @@ if (!is_callable('smarty_function_html_options')) require_once 'C:/OpenServer/do
                 <th>Category</th>
                 <th>Publisher</th>
                 <th>Authors</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th></th>
             </tr>
         </thead>
         <?php
@@ -87,6 +91,13 @@ if ($__foreach_a_1_saved_item) {
 $_smarty_tpl->tpl_vars['a'] = $__foreach_a_1_saved_item;
 }
 ?></td>
+                <form method="POST" action="/Book/modify_db/" target="_blank">
+                    <td><input type='checkbox' name='edit_now' /></td>
+                    <td><input type='checkbox' name='delete_now' /></td>
+                    <td><input type="submit" value="Go" name="book_id"></td>
+                    <input type='hidden' value=<?php echo $_smarty_tpl->tpl_vars['b']->value->id;?>
+ name="book_id" />
+                </form>
             </tr>
         <?php
 $_smarty_tpl->tpl_vars['b'] = $__foreach_b_0_saved_local_item;
@@ -97,7 +108,9 @@ $_smarty_tpl->tpl_vars['b'] = $__foreach_b_0_saved_item;
 }
 ?>
     </table>
-    
+    <?php $_smarty_tpl->setupSubTemplate('file:modify_db/add_book.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false)->render();
+?>
+
 </div>
 <?php }
 }

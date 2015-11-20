@@ -1,7 +1,8 @@
 <div>
     </br>
-    {if $smarty.post.modify_db == "Add book"}
-        <form method="get" action="/Book/Add">
+    {if $show_form}
+        <span>Add book</span>
+        <form method="POST" action="/Book/modify_db/">
             <input type='text' name='book_name' />
             <span> < < < Book name </span>
             </br>
@@ -28,14 +29,14 @@
             </br>
             
             </br>
-            <input type="submit" value="Done">
+            <input type="submit" value="Done" name="add_book">
         </form>
         <form method="POST" action="{$smarty.server.REQUEST_URI}">
-            <input type="submit" value="Cancel" name="modify_db" />
+            <input type="submit" value="Cancel" name="add_book" />
         </form>
-    {else}
-        <form method="POST" action="{$smarty.server.REQUEST_URI}">
-            <input type="submit" value="Add book" name="modify_db" />
-        </form>
-    {/if}
+        {else}
+            <form method="POST" action="/Book/modify_db/" target="_blank">
+                <input type="submit" value="Add book" name="add_book" />
+            </form>
+        {/if}
 </div>
