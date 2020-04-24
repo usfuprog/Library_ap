@@ -16,7 +16,7 @@ class Router {
     }
     
     public function Action() {
-        return $this->uri_parts[1];
+        return isset($this->uri_parts[1]) ? $this->uri_parts[1] : "";
     }
     
     public function Params() {
